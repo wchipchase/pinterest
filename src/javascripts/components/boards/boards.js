@@ -1,5 +1,6 @@
 import boardData from '../../helpers/data/boardsData';
 import util from '../../helpers/util';
+import pins from '../pins/pins';
 
 let boardsArray = [];
 
@@ -8,6 +9,7 @@ const seePinDiv = (e) => {
   console.error('You clicked a button', boardId);
   document.getElementById('boards-page').classList.add('hide');
   document.getElementById('pins-page').classList.remove('hide');
+  pins.initPins(boardId);
 };
 
 const bindEvents = () => {
@@ -21,10 +23,10 @@ const domStringBuilder = () => {
   let domString = '';
   boardsArray.forEach((board) => {
     domString += `<div id="${board.id}" class="card col-3">`;
-    domString += `<div class="card-header">${board.id}</div>`;
+    domString += `<h5 class="card-title">${board.name}</h5>`;
     domString += '<div class="card-body">';
     domString += '<button class="btn btn-warning see-pins">Pins</button>';
-    domString += `<h5 class="card-title">${board.name}</h5>`;
+    domString += `<a class = "link" href = "${board.pin}"></a>`;
     domString += '</div>';
     domString += '</div>';
   });
